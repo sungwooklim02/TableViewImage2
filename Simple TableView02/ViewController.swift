@@ -19,6 +19,9 @@ class ViewController: UIViewController, UITableViewDataSource {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         myTableView.dataSource = self
+        
+        //navigationBar
+        self.title = "동물농장"
     }
     
     // UITableViewDataSource Method
