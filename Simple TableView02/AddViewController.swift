@@ -9,11 +9,19 @@
 import UIKit
 
 class AddViewController: UIViewController {
-
+    @IBOutlet weak var myLabel: UILabel!
+    @IBOutlet weak var myImageView: UIImageView!
+    
+    var myData: String?
+    var myImage: String?
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        myLabel.text = myData
+        myImageView.image = UIImage(named: myImage!)
     }
     
 

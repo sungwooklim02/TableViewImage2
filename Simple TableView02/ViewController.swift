@@ -13,7 +13,8 @@ class ViewController: UIViewController, UITableViewDataSource {
 
     @IBOutlet weak var myTableView: UITableView!
     var animals = ["Cat","Dog","Bird","Pig","Horse","Whale"]
-    var year = ["3","5","10","2","6","3"]
+    var year = ["고양이","강아지","새","돼지","말","고래"]
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +31,7 @@ class ViewController: UIViewController, UITableViewDataSource {
     }
     
     public func numberOfSections(in tableView: UITableView) -> Int{
-        return 2
+        return 1
     }
     
     public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String?{
@@ -52,10 +53,10 @@ class ViewController: UIViewController, UITableViewDataSource {
     
     // cell을 생성
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
-    
+        let row = indexPath.row
         // cell 생성, 재활용 풀 사용
         let cell = myTableView.dequeueReusableCell(withIdentifier: "RE", for: indexPath)
-        let row = indexPath.row
+        
         print("section: \(indexPath.section)    row:\(indexPath.row)")
     
         cell.textLabel?.text = animals[row]
@@ -64,6 +65,26 @@ class ViewController: UIViewController, UITableViewDataSource {
         //image넣기
         cell.imageView?.image = UIImage(named: animals[row])
         return cell
+    }
+    
+    //DatailViewController의 myData 변수에 "Cat"을 보냄
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        
+        if segue.identifier == "addgo"{
+            let addVC = segue.destination as! AddViewController
+            addVC.myData = animals[1]
+            addVC.myImage = animals[1]
+            addVC.self.navigationItem.title = year[1]
+        }else if segue.identifier == "detailgo"{
+            let addVC2 = segue.destination as! DetailViewController
+            let row = myTableView.indexPathForSelectedRow
+            
+            addVC2.myData2 = animals[(row?.row)!]
+            addVC2.myImg = animals[(row?.row)!]
+            addVC2.self.navigationItem.title = year[(row?.row)!]
+            
+        }
     }
 }
 
